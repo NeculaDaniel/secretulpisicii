@@ -36,20 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // === PASUL 3: CONFIGURARE CONSTANTE ===
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'alvoro_r1_admin');
-define('DB_USER', 'alvoro_r1_user');
-define('DB_PASS', 'Parola2020@');
-
-define('SMTP_HOST', 'smtp.gmail.com');
-define('SMTP_PORT', 587);
-define('SMTP_USER', 'alvoro.enterprise@gmail.com');
-define('SMTP_PASS', 'muxtrnkxpnxqqfjq');
-define('ADMIN_EMAIL', 'alvoro.enterprise@gmail.com');
-define('FROM_EMAIL', 'alvoro.enterprise@gmail.com');
-define('FROM_NAME', 'Secretul Pisicii');
-define('ADMIN_URL', 'https://secretulpisicii.alvoro.ro/admin.php'); 
-define('SHIPPING_COST', 14);
+require_once __DIR__ . '/config.php';
 
 // === PASUL 4: INCLUDE PHPMailer ===
 require __DIR__ . '/PHPMailer-master/src/Exception.php';
@@ -470,4 +457,5 @@ if ($orderId) {
 }
 
 exit; // Finalul scriptului
+
 ?>
