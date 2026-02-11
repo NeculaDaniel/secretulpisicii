@@ -1,12 +1,14 @@
 <?php
 // oblio_functions.php
+// Datele sunt preluate automat din config.php
 
-// === CONFIGURARE OBLIO ===
-define('OBLIO_EMAIL', 'david.altafini@gmail.com'); 
-define('OBLIO_API_SECRET', '9b8deadd81e5fa6017575ec822820740a44306c1'); 
-define('OBLIO_CUI_FIRMA', '53181323'); // CUI-ul firmei tale care emite
-define('OBLIO_SERIE', 'ALT'); // Ex: FCT, SR, etc (trebuie definita in Oblio)
 function sendOrderToOblio($orderData, $orderId, $pdo) {
+    // Verificare de siguranta
+    if (!defined('OBLIO_API_SECRET')) {
+        return ['success' => false, 'message' => 'Eroare: Lipsesc datele Oblio din config.php'];
+    }
+
+    // ... restul codului ramane neschimbat de aici in jos ... {
     
     // 1. Verificăm cURL
     if (!function_exists('curl_init')) {
@@ -95,4 +97,5 @@ function sendOrderToOblio($orderData, $orderId, $pdo) {
         $msg = isset($response['status']['message']) ? json_encode($response['status']['message']) : $result;
         return ['success' => false, 'message' => "Eroare Oblio ($httpCode): " . $msg];
     }
+
 }
