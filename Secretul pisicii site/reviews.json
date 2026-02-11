@@ -1,0 +1,51 @@
+[
+    {
+        "name": "Antonia",
+        "stars": 5,
+        "text": "Genial\u0103 peria, m a ajutat extrem de mult \u2764\ufe0f\u2764\ufe0f",
+        "date": "2026-01-13 12:26:41",
+        "ip": "95.76.3.98"
+    },
+    {
+        "name": "\u0218tefan",
+        "stars": 5,
+        "text": "Este foarte folositoare",
+        "date": "2026-01-10 21:37:38",
+        "ip": "86.121.2.132"
+    },
+    {
+        "name": "Alexandru Florin",
+        "stars": 5,
+        "text": "Func\u021bioneaz\u0103 perfect!\ud83d\ude00\ud83e\udd29",
+        "date": "2026-01-10 20:59:18",
+        "ip": "172.225.224.140"
+    },
+    {
+        "name": "Daniel",
+        "stars": 5,
+        "text": "Incredibila",
+        "date": "2026-01-09 23:39:56",
+        "ip": "86.121.2.204"
+    },
+    {
+        "name": "Andrei Eric",
+        "stars": 5,
+        "text": "Peria func\u021bioneaz\u0103 foarte bine!",
+        "date": "2026-01-09 22:00:07",
+        "ip": "86.121.2.196"
+    },
+    {
+        "name": "Raluca",
+        "stars": 5,
+        "text": "Recoman aceasta perie!",
+        "date": "2026-01-07 23:21:28",
+        "ip": "86.125.20.81"
+    },
+    {
+        "name": "David",
+        "stars": 5,
+        "text": "Foarte buna!",
+        "date": "2026-01-07 23:20:25",
+        "ip": "81.196.217.5"
+    }
+]

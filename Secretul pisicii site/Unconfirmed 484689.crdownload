@@ -1,0 +1,178 @@
+// ==========================================
+//   REVIEWS LOGIC - MySQL + LocalStorage
+//   Înlocuiește funcțiile initReviews() și addReviewDOM() 
+//   din index.html cu acest cod
+// ==========================================
+
+async function fetchReviews() {
+    const track = document.getElementById('reviews-track');
+    try {
+        const response = await fetch('reviews_api.php');
+        if (!response.ok) throw new Error('API Error');
+        const reviews = await response.json();
+        
+        track.innerHTML = ''; 
+        
+        if (reviews.length === 0) {
+            // Fallback reviews dacă nu există niciunul
+            addReviewDOM({name: "Maria T.", stars: 5, text: "Peria este minunată! Pisica mea o adoră."});
+            addReviewDOM({name: "Andrei P.", stars: 5, text: "Foarte eficientă, scapă de mult păr."});
+            return;
+        }
+
+        // Calculează rating mediu
+        let totalStars = 0;
+        reviews.forEach(r => { 
+            totalStars += parseInt(r.stars); 
+            addReviewDOM(r); 
+        });
+
+        const avg = (totalStars / reviews.length).toFixed(1);
+        document.getElementById('avg-rating-num').innerText = avg;
+        document.getElementById('total-reviews-summary').innerText = reviews.length;
+        document.getElementById('rating-summary').style.display = 'flex';
+
+    } catch (err) {
+        console.log('Using fallback reviews:', err);
+        track.innerHTML = '';
+        addReviewDOM({name: "Maria T.", stars: 5, text: "Peria este minunată! Pisica mea o adoră."});
+        addReviewDOM({name: "Andrei P.", stars: 5, text: "Foarte eficientă, scapă de mult păr."});
+    }
+}
+
+function addReviewDOM(review) {
+    const track = document.getElementById('reviews-track');
+    const div = document.createElement('div');
+    div.className = 'review-card';
+    const stars = '★'.repeat(parseInt(review.stars) || 5);
+    const letter = review.name ? review.name.charAt(0).toUpperCase() : 'C';
+    
+    div.innerHTML = `
+        <div class="stars">${stars}</div>
+        <p class="review-text">"${review.text}"</p>
+        <div class="reviewer-info">
+            <div class="reviewer-avatar">${letter}</div>
+            <span>${review.name}</span>
+        </div>
+    `;
+    track.appendChild(div);
+}
+
+function initReviews() {
+    // Verificare LocalStorage - A dat deja review?
+    if(localStorage.getItem('hasReviewed')) {
+        const btn = document.getElementById('add-review-btn');
+        if(btn) {
+            btn.innerText = "✅ Ai adăugat o recenzie";
+            btn.disabled = true;
+            btn.style.opacity = "0.7";
+            btn.onclick = null;
+        }
+    }
+
+    // Încarcă reviews
+    fetchReviews(); 
+    
+    // Modal Logic
+    const form = document.getElementById('new-review-form');
+    const starInputs = document.querySelectorAll('#star-input span');
+    const starHidden = document.getElementById('review-stars');
+
+    // Star Rating Input
+    starInputs.forEach(s => s.addEventListener('click', function() {
+        const val = this.dataset.val;
+        starHidden.value = val;
+        starInputs.forEach(star => star.classList.toggle('active', star.dataset.val <= val));
+    }));
+    starInputs.forEach(star => star.classList.add('active'));
+
+    // Form Submit
+    if(form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Verificare LocalStorage (client-side)
+            if(localStorage.getItem('hasReviewed')) {
+                alert("Ai adăugat deja o recenzie.");
+                closeReviewModal();
+                return;
+            }
+
+            const btn = form.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = "Se trimite...";
+            btn.disabled = true;
+
+            const data = {
+                name: document.getElementById('review-name').value,
+                stars: starHidden.value,
+                text: document.getElementById('review-text').value
+            };
+            
+            try {
+                const res = await fetch('reviews_api.php', {
+                    method:'POST', 
+                    headers:{'Content-Type':'application/json'}, 
+                    body:JSON.stringify(data)
+                });
+                
+                const result = await res.json();
+
+                if(res.ok && result.success) {
+                    form.reset(); 
+                    closeReviewModal(); 
+                    fetchReviews(); // Reîncarcă reviews
+                    
+                    // Setează flag LocalStorage + IP (server-side deja verificat)
+                    localStorage.setItem('hasReviewed', 'true');
+                    
+                    // Update buton UI
+                    const addBtn = document.getElementById('add-review-btn');
+                    addBtn.innerText = "✅ Ai adăugat o recenzie";
+                    addBtn.disabled = true;
+                    addBtn.style.opacity = "0.7";
+                    addBtn.onclick = null;
+
+                    alert("Mulțumim pentru recenzie!");
+                } else { 
+                    // Eroare de la server (ex: IP-ul deja a dat review)
+                    alert(result.error || 'Eroare la salvare.'); 
+                    
+                    // Dacă eroarea e că a dat deja review, setăm flag
+                    if(result.error && result.error.includes('deja')) {
+                        localStorage.setItem('hasReviewed', 'true');
+                    }
+                }
+            } catch(err) { 
+                console.error('Review Error:', err);
+                alert('Eroare conexiune.'); 
+            }
+            
+            btn.innerText = originalText;
+            btn.disabled = false;
+        });
+    }
+
+    // Navigation Buttons
+    const track = document.getElementById('reviews-track');
+    document.getElementById('prevReview')?.addEventListener('click', () => track.scrollBy({left: -320, behavior:'smooth'}));
+    document.getElementById('nextReview')?.addEventListener('click', () => track.scrollBy({left: 320, behavior:'smooth'}));
+}
+
+function openReviewModal() { 
+    // Verificare dublă LocalStorage
+    if(localStorage.getItem('hasReviewed')) {
+        alert("Ai adăugat deja o recenzie.");
+        return;
+    }
+    document.getElementById('review-modal').style.display = 'flex'; 
+}
+
+function closeReviewModal() { 
+    document.getElementById('review-modal').style.display = 'none'; 
+}
+
+// Close modal on outside click
+window.onclick = e => { 
+    if(e.target == document.getElementById('review-modal')) closeReviewModal(); 
+}

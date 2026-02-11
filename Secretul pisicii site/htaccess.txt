@@ -1,0 +1,38 @@
+# ====================================================
+# SECURITATE SECRETUL PISICII - VARIANTA FINALA
+# ====================================================
+
+# 1. CRITIC: Protejeaza fisierul cu parole (.env)
+# Asta asigura ca nimeni nu poate descarca fisierul cu parolele DB si Email
+# PROTECTIE CRITICA PENTRU .ENV
+<Files .env>
+    # Pentru Apache 2.2
+    Order allow,deny
+    Deny from all
+    
+    # Pentru Apache 2.4 (cel mai comun acum)
+    Require all denied
+</Files>
+
+# 2. Protejeaza alte fisiere sensibile (loguri, backup-uri DB)
+<FilesMatch "(\.log|\.db|\.sql|composer\.json|composer\.lock)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# 3. Dezactiveaza listarea directoarelor
+# (Daca cineva nimereste un folder fara index.php, nu vede lista de fisiere)
+Options -Indexes
+
+# 4. Protectie URL (SQL Injection & XSS)
+RewriteEngine On
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=http:// [OR]
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=(\.\.//?)+ [OR]
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=/([a-z0-9_.]//?)+ [NC]
+RewriteRule .* - [F]
+
+# 5. FORTEAZA HTTPS (Obligatoriu pentru magazine online)
+# Am activat liniile acestea pentru tine. 
+# Asigura-te ca ai certificatul SSL instalat pe hosting (de obicei e gratuit).
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

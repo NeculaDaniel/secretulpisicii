@@ -1,0 +1,6 @@
+[2026-01-16 23:49:16] === INCEPERE PROCESARE COMANDA #91 ===
+[2026-01-16 23:49:16] Pret total: 111 | Produs: 97 | Transport: 14
+[2026-01-16 23:49:16] Date trimise catre Oblio: {"cif":"53181323","client":{"name":"David Necula","email":"david.altafini@gmail.com","phone":"0756929352","address":"Intrarea leordeni","city":"Oras Bragadiru","state":"ilfov","country":"RO","save":true},"seriesName":"ALT","collect":{"payType":"Ramburs","value":111},"products":[{"name":"Pachet 2","measuringUnitName":"buc","currency":"RON","quantity":1,"price":97,"vatName":"19%"},{"name":"Servicii Transport","measuringUnitName":"serv","currency":"RON","quantity":1,"price":14,"vatName":"19%"}]}
+[2026-01-16 23:49:26] Raspuns HTTP Code: 401
+[2026-01-16 23:49:26] Raspuns Oblio Body: {"status":401,"statusMessage":"The access token provided is invalid"}
+[2026-01-16 23:49:26] EROARE OBLIO: Eroare necunoscuta
