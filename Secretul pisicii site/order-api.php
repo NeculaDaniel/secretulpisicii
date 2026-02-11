@@ -421,41 +421,40 @@ try {
 
 // Gata! Scriptul se termina aici.
 // === INTEGRARE OBLIO (AUTO SEND) ===
-// Doar daca a trecut de salvarea in DB
 if ($orderId) {
     try {
-        require_once __DIR__ . '/oblio_functions.php';
-        
-        // Verificam setarea din DB: Este Auto Send ON?
-        $pdo = getDbConnection();
-        $stmtS = $pdo->prepare("SELECT setting_value FROM settings WHERE setting_key = 'auto_oblio'");
-        $stmtS->execute();
-        $setting = $stmtS->fetch();
-
-        if ($setting && $setting['setting_value'] == '1') {
-            // Reconstruim structura de date necesara functiei Oblio
-            // (Atentie: $data deja exista in api, dar trebuie sa fim siguri ca are cheile corecte pentru DB mapping)
-            // Cel mai sigur e sa luam datele "curate" sau sa folosim $data existent
-            $orderDataForOblio = [
-                'full_name' => $data['fullName'],
-                'email' => $data['email'],
-                'phone' => $data['phone'],
-                'address_line' => $data['address']['line'],
-                'city' => $data['address']['city'],
-                'county' => $data['address']['county'],
-                'total_price' => floatval($data['price']) + 14, // Refacem totalul
-                'payment_method' => $data['paymentMethod'],
-                'bundle' => $data['bundle']
-            ];
-
-            sendOrderToOblio($orderDataForOblio, $orderId, $pdo);
-            error_log("Oblio Auto-Send executat pentru comanda #$orderId");
+        // Includem functiile daca nu sunt deja incluse
+        if (!function_exists('sendOrderToOblio')) {
+            require_once __DIR__ . '/oblio_functions.php';
         }
+        
+        // Pregatim datele
+        $orderDataForOblio = [
+            'full_name'    => $data['fullName'],
+            'email'        => $data['email'],
+            'phone'        => $data['phone'],
+            'address_line' => $data['address']['line'],
+            'city'         => $data['address']['city'],
+            'county'       => $data['address']['county'],
+            'total_price'  => floatval($data['price']) + SHIPPING_COST,
+            'payment_method' => $data['paymentMethod'],
+            'bundle'       => $data['bundle']
+        ];
+
+        // Trimitem factura
+        $res = sendOrderToOblio($orderDataForOblio, $orderId, getDbConnection());
+        
+        // Logam rezultatul in fisierul de erori pentru verificare
+        if($res['success']) {
+            error_log("OBLIO SUCCESS: Factura emisa pentru comanda #$orderId");
+        } else {
+            error_log("OBLIO ERROR Comanda #$orderId: " . $res['message']);
+        }
+
     } catch (Exception $e) {
-        error_log("Oblio Auto-Send Error: " . $e->getMessage());
+        error_log("OBLIO EXCEPTION: " . $e->getMessage());
     }
 }
 
-exit; // Finalul scriptului
-
+exit;
 ?>
