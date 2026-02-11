@@ -423,12 +423,10 @@ try {
 // === INTEGRARE OBLIO (AUTO SEND) ===
 if ($orderId) {
     try {
-        // Includem functiile daca nu sunt deja incluse
         if (!function_exists('sendOrderToOblio')) {
             require_once __DIR__ . '/oblio_functions.php';
         }
         
-        // Pregatim datele
         $orderDataForOblio = [
             'full_name'    => $data['fullName'],
             'email'        => $data['email'],
@@ -441,20 +439,43 @@ if ($orderId) {
             'bundle'       => $data['bundle']
         ];
 
-        // Trimitem factura
-        $res = sendOrderToOblio($orderDataForOblio, $orderId, getDbConnection());
+        sendOrderToOblio($orderDataForOblio, $orderId, getDbConnection());
+
+    } catch (Exception $e) {
+        error_log("OBLIO ERROR: " . $e->getMessage());
+    }
+}
+// === INTEGRARE E-COLET (AUTO AWB) ===
+if ($orderId) {
+    try {
+        if (!function_exists('generateEcoletAWB')) {
+            require_once __DIR__ . '/ecolet_functions.php';
+        }
+
+        $orderDataForEcolet = [
+            'full_name'    => $data['fullName'],
+            'email'        => $data['email'],
+            'phone'        => $data['phone'],
+            'address_line' => $data['address']['line'],
+            'city'         => $data['address']['city'],
+            'county'       => $data['address']['county'],
+            'total_price'  => floatval($data['price']) + SHIPPING_COST,
+            'bundle'       => $data['bundle']
+        ];
+
+        $awbResult = generateEcoletAWB($orderDataForEcolet, $orderId, getDbConnection());
         
-        // Logam rezultatul in fisierul de erori pentru verificare
-        if($res['success']) {
-            error_log("OBLIO SUCCESS: Factura emisa pentru comanda #$orderId");
+        if ($awbResult['success']) {
+            error_log("ECOLET SUCCESS: " . $awbResult['message']);
         } else {
-            error_log("OBLIO ERROR Comanda #$orderId: " . $res['message']);
+            error_log("ECOLET ERROR Comanda #$orderId: " . $awbResult['message']);
         }
 
     } catch (Exception $e) {
-        error_log("OBLIO EXCEPTION: " . $e->getMessage());
+        error_log("ECOLET EXCEPTION: " . $e->getMessage());
     }
 }
+
 
 exit;
 ?>

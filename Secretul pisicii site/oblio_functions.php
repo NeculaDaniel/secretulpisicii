@@ -1,14 +1,13 @@
 <?php
 // oblio_functions.php
-// Datele sunt preluate automat din config.php
+// Datele sunt preluate din config.php
 
 function sendOrderToOblio($orderData, $orderId, $pdo) {
-    // Verificare de siguranta
-    if (!defined('OBLIO_API_SECRET')) {
-        return ['success' => false, 'message' => 'Eroare: Lipsesc datele Oblio din config.php'];
+    if (!defined('OBLIO_API_SECRET') || !OBLIO_API_SECRET) {
+        return ['success' => false, 'message' => 'Configuratia Oblio lipseste'];
     }
-
-    // ... restul codului ramane neschimbat de aici in jos ... {
+    
+    // ... restul codului ramane la fel ...{
     
     // 1. Verificăm cURL
     if (!function_exists('curl_init')) {
