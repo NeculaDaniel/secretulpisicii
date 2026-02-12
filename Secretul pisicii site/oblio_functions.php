@@ -7,8 +7,6 @@ function sendOrderToOblio($orderData, $orderId, $pdo) {
         return ['success' => false, 'message' => 'Configuratia Oblio lipseste'];
     }
     
-    // ... restul codului ramane la fel ...{
-    
     // 1. Verificăm cURL
     if (!function_exists('curl_init')) {
         return ['success' => false, 'message' => 'cURL nu este activat pe server!'];
@@ -98,3 +96,4 @@ function sendOrderToOblio($orderData, $orderId, $pdo) {
     }
 
 }
+
