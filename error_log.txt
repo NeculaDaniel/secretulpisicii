@@ -1,0 +1,59 @@
+[26-Feb-2026 22:08:13 UTC] CRITICAL: Folderul PHPMailer-master nu a fost gasit!
+[26-Feb-2026 22:08:13 UTC] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\PHPMailer" not found in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php:137
+Stack trace:
+#0 /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php(162): getMailer()
+#1 /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php(352): sendAdminEmail(Array, '98', 14.0)
+#2 {main}
+  thrown in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php on line 137
+[26-Feb-2026 22:08:16 UTC] CRITICAL: Folderul PHPMailer-master nu a fost gasit!
+[26-Feb-2026 22:08:16 UTC] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\PHPMailer" not found in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php:137
+Stack trace:
+#0 /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php(162): getMailer()
+#1 /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php(352): sendAdminEmail(Array, '99', 14.0)
+#2 {main}
+  thrown in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php on line 137
+[26-Feb-2026 22:08:48 UTC] CRITICAL: Folderul PHPMailer-master nu a fost gasit!
+[26-Feb-2026 22:08:48 UTC] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\PHPMailer" not found in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php:137
+Stack trace:
+#0 /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php(162): getMailer()
+#1 /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php(352): sendAdminEmail(Array, '100', 14.0)
+#2 {main}
+  thrown in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php on line 137
+[26-Feb-2026 22:09:44 UTC] CRITICAL: Folderul PHPMailer-master nu a fost gasit!
+[26-Feb-2026 22:09:44 UTC] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\PHPMailer" not found in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php:137
+Stack trace:
+#0 /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php(162): getMailer()
+#1 /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php(352): sendAdminEmail(Array, '101', 14.0)
+#2 {main}
+  thrown in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php on line 137
+[26-Feb-2026 22:25:45 UTC] CRITICAL: Folderul PHPMailer-master nu a fost gasit!
+[26-Feb-2026 22:25:45 UTC] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\PHPMailer" not found in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php:137
+Stack trace:
+#0 /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php(162): getMailer()
+#1 /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php(352): sendAdminEmail(Array, '103', 14.0)
+#2 {main}
+  thrown in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php on line 137
+[26-Feb-2026 22:35:44 UTC] CRITICAL: Folderul PHPMailer-master nu a fost gasit!
+[26-Feb-2026 22:35:44 UTC] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\PHPMailer" not found in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php:137
+Stack trace:
+#0 /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php(162): getMailer()
+#1 /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php(352): sendAdminEmail(Array, '104', 14.0)
+#2 {main}
+  thrown in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php on line 137
+[26-Feb-2026 23:18:58 UTC] CRITICAL: Folderul PHPMailer-master nu a fost gasit!
+[26-Feb-2026 23:18:58 UTC] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\PHPMailer" not found in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php:127
+Stack trace:
+#0 /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php(151): getMailer()
+#1 /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php(341): sendAdminEmail(Array, '105', 14.0)
+#2 {main}
+  thrown in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php on line 127
+[26-Feb-2026 23:23:20 UTC] PHP Fatal error:  Uncaught Exception: Eroare Token: Eroare Token Oblio (401): Authorization header not detected in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/oblio_functions.php:123
+Stack trace:
+#0 /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php(363): sendToOblio('106')
+#1 {main}
+  thrown in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/oblio_functions.php on line 123
+[27-Feb-2026 07:59:13 UTC] PHP Fatal error:  Uncaught Exception: Eroare Token: Eroare Token Oblio (401): Authorization header not detected in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/oblio_functions.php:123
+Stack trace:
+#0 /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/order-api.php(363): sendToOblio('107')
+#1 {main}
+  thrown in /var/www/22b4e3e9-de78-418c-a991-dee0eb35864e/secretulpisicii.alvoro.ro/oblio_functions.php on line 123

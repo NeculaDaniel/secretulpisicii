@@ -1,0 +1,37 @@
+# ====================================================
+# SECURITATE SECRETUL PISICII - VARIANTA FINALA + FIX OBLIO
+# ====================================================
+
+# >>> FIX CRITIC PENTRU OBLIO <<<
+# Aceasta linie este OBLIGATORIE. Fara ea, serverul sterge parola catre Oblio.
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+
+# 1. CRITIC: Protejeaza fisierul cu parole (.env)
+<Files .env>
+    # Pentru Apache 2.2
+    Order allow,deny
+    Deny from all
+    
+    # Pentru Apache 2.4
+    Require all denied
+</Files>
+
+# 2. Protejeaza alte fisiere sensibile
+<FilesMatch "(\.log|\.db|\.sql|composer\.json|composer\.lock)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# 3. Dezactiveaza listarea directoarelor
+Options -Indexes
+
+# 4. Protectie URL (SQL Injection & XSS)
+RewriteEngine On
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=http:// [OR]
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=(\.\.//?)+ [OR]
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=/([a-z0-9_.]//?)+ [NC]
+RewriteRule .* - [F]
+
+# 5. FORTEAZA HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
