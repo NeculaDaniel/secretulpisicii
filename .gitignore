@@ -1,5 +1,0 @@
-.env
-.DS_Store
-/vendor
-order-api-errors.log
-debug_oblio.txt
